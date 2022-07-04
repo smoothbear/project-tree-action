@@ -10,7 +10,7 @@ inputs:
       description: 'file to be replaced text.'
       required: false
       default: 'README.md'
-    commit-message:
+    message:
       description: 'commit message when text updated.'
       required: false
       default: 'update: project tree'
