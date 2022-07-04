@@ -8,7 +8,7 @@ const git = simpleGit(baseDir);
 
 export async function run() {
     const regex = core.getInput("regex", { required: true });
-    const path = core.getInput("path", { required: true });
+    const path = process.env.GITHUB_WORKSPACE + "/" + core.getInput("path", { required: true });
     const message = core.getInput("message", { required: true });
     const email = core.getInput("email", { required: true });
     const username = core.getInput("username", { required: true });
