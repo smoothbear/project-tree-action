@@ -8,7 +8,7 @@ inputs:
       required: true
     path:
       description: 'file to be replaced text.'
-      default: './README.md'
+      default: 'README.md'
       required: true
     message:
       description: 'commit message when text updated.'
