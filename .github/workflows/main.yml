@@ -1,0 +1,15 @@
+name: Update to README
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  change-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Insert Project Tree
+        uses: smoothbear/project-tree-action@latest
+        with:
+          email: ${{ secrets.git-email }}
+          name: smoothbear
