@@ -1,4 +1,4 @@
-name: 'Insert Project Tree to README'
+name: 'Insert Project Tree'
 description: 'Automatically setting up project tree text to README.md'
 author: 'smoothbear'
 inputs:
