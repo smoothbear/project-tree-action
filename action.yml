@@ -4,7 +4,7 @@ author: 'smoothbear'
 inputs:
     regex:
       description: 'text to be replaced.'
-      default: '{%project-tree}'
+      default: '{%project-tree%}'
     path:
       description: 'file to be replaced text.'
       default: 'README.md'
