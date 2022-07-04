@@ -2,29 +2,21 @@ name: 'Generate Project Tree'
 description: 'Automatically setting up project tree text to README.md'
 author: 'smoothbear'
 inputs:
-#     regex:
-#       description: 'text to be replaced.'
-#       default: '{%project-tree%}'
-#     path:
-#       description: 'file to be replaced text.'
-#       default: 'README.md'
-#     message:
-#       description: 'commit message when text updated.'
-#       default: 'update: project tree'
-#     email:
-#       description: 'to be committed user email.'
-#       required: true
-#     username:
-#       description: 'to be committed user name.'
-#       required: true
-    label-name:
-      description: 'Label name'
-      required: false
-    owner:
-      description: 'Repository owner name.'
-      required: false
-    token:
-      description: 'Github access token.'
+    regex:
+      description: 'text to be replaced.'
+      default: '{%project-tree%}'
+    path:
+      description: 'file to be replaced text.'
+      default: 'README.md'
+    message:
+      description: 'commit message when text updated.'
+      default: 'update: project tree'
+    email:
+      description: 'to be committed user email.'
+      required: true
+    username:
+      description: 'to be committed user name.'
+      required: true
 runs:
     using: 'node16'
     main: 'dist/project/index.js'
