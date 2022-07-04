@@ -4,21 +4,18 @@ author: 'smoothbear'
 inputs:
     regex:
       description: 'text to be replaced.'
-      required: false
       default: '{%project-tree}'
     path:
       description: 'file to be replaced text.'
-      required: false
       default: 'README.md'
     message:
       description: 'commit message when text updated.'
-      required: false
       default: 'update: project tree'
     email:
-      description: 'to be committed user's email.'
+      description: 'to be committed user email.'
       required: true
     username:
-      description: 'to be committed user's name.'
+      description: 'to be committed user name.'
       required: true
 runs:
     using: 'node16'
