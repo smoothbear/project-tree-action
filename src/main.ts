@@ -13,28 +13,26 @@ export async function run() {
     const email = core.getInput("email", { required: true });
     const username = core.getInput("username", { required: true });
 
-    core.info(path);
-
     exec("tree -a", (error, stdout, stderr) => {
         if (error) {
-            core.error(`error: ${error.message}`);
+            core.error(`error: exec ${error.message}`);
             return;
         }
         if (stderr) {
-            core.error(`stderr: ${stderr}`);
+            core.error(`stderr: stderr ${stderr}`);
             return;
         }
 
         fs.readFile(path, "utf-8", (err, contents) => {
             if (err) {
-                core.error(`error: ${err}`);
+                core.error(`error: readfile ${err}`);
                 return;
             }
 
             const replaced = contents.replace(RegExp(regex), stdout);
 
             fs.writeFile(path, replaced, "utf-8", (err) =>
-                core.error(`error: ${err}`)
+                core.error(`error: writefile ${err}`)
             );
         });
 
