@@ -20,7 +20,6 @@ inputs:
     username:
       description: 'to be committed user's name.'
       required: true
-
 runs:
     using: 'node16'
     main: 'dist/project/index.js'
