@@ -13,6 +13,8 @@ export async function run() {
     const email = core.getInput("email", { required: true });
     const username = core.getInput("username", { required: true });
 
+    core.info(path);
+
     exec("tree -a", (error, stdout, stderr) => {
         if (error) {
             core.error(`error: ${error.message}`);
