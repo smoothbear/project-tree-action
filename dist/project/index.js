@@ -7387,7 +7387,11 @@ function run() {
                     return;
                 }
                 const replaced = contents.replace(RegExp(regex), stdout);
-                fs.writeFile(path, replaced, "utf-8", (err) => core.error(`error: writefile ${err}`));
+                fs.writeFile(path, replaced, "utf-8", (err) => {
+                    if (err != null) {
+                        core.error(`error: writefile ${err}`);
+                    }
+                });
             });
             git.addConfig("user.email", email).addConfig("user.name", username);
             git.add(path);
