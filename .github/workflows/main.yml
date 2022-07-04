@@ -8,6 +8,7 @@ jobs:
   change-readme:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@latest
       - name: Insert Project Tree
         uses: smoothbear/project-tree-action@0.0.5
         with:
