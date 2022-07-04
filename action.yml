@@ -2,24 +2,24 @@ name: 'Generate Project Tree'
 description: 'Automatically setting up project tree text to README.md'
 author: 'smoothbear'
 inputs:
-   regex:
-      description: 'text to be replaced.'
-      required: false
-      default: '{%project-tree%}'
-   path:
-      description: 'file to be replaced text.'
-      required: false
-      default: 'README.md'
-   message:
-      description: 'commit message when text updated.'
-      required: false
-      default: 'update: project tree'
-   email:
-      description: 'to be committed user's email.'
-      required: true
-   username:
-      description: 'to be committed user's name.'
-      required: true
+#    regex:
+#       description: 'text to be replaced.'
+#       required: false
+#       default: '{%project-tree%}'
+#    path:
+#       description: 'file to be replaced text.'
+#       required: false
+#       default: 'README.md'
+#    message:
+#       description: 'commit message when text updated.'
+#       required: false
+#       default: 'update: project tree'
+#    email:
+#       description: 'to be committed user's email.'
+#       required: true
+#    username:
+#       description: 'to be committed user's name.'
+#       required: true
 runs:
    using: 'node16'
    main: 'dist/project/index.js'
