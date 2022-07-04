@@ -5,15 +5,15 @@ inputs:
     regex:
       description: 'text to be replaced.'
       default: '{%project-tree%}'
-      required: false
+      required: true
     path:
       description: 'file to be replaced text.'
       default: 'README.md'
-      required: false
+      required: true
     message:
       description: 'commit message when text updated.'
       default: 'update: project tree'
-      required: false
+      required: true
     email:
       description: 'to be committed user email.'
       required: true
