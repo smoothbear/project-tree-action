@@ -7369,7 +7369,7 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         const regex = core.getInput("regex", { required: true });
         const path = core.getInput("path", { required: true });
-        const message = core.getInput("commit-message", { required: true });
+        const message = core.getInput("message", { required: true });
         const email = core.getInput("email", { required: true });
         const username = core.getInput("username", { required: true });
         (0, child_process_1.exec)("tree -a", (error, stdout, stderr) => {
