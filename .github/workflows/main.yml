@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Insert Project Tree
-        uses: smoothbear/project-tree-action@0.0.3
+        uses: smoothbear/project-tree-action@0.0.4
         with:
           email: ${{ secrets.GIT_EMAIL }}
           username: smoothbear
