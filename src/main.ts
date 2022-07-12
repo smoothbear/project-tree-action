@@ -55,11 +55,6 @@ export async function run() {
         await git.add(path);
         await git.commit(message);
         await git.push();
-        await git
-            .log()
-            .then(result =>
-                core.info(result.latest ? result.latest.message : "")
-            );
     });
 }
 
