@@ -4,7 +4,23 @@
 **Example Workflow**
 | key      | description                       | default value         |
 |----------|-----------------------------------|-----------------------|
-| title    | text to be replaced.              | ### Project Structure |
+| title    | text to be replaced.              | ### Project Structure
+```.
+├── LICENSE
+├── README.md
+├── action.yml
+├── dist
+│   └── project
+│       └── index.js
+├── jest-config.js
+├── package-lock.json
+├── package.json
+├── src
+│   └── main.ts
+└── tsconfig.json
+
+3 directories, 9 files
+``` |
 | path     | file to be replaced text.         | README.md             |
 | message  | commit message when text updated. | update: project tree  |
 | email    | to be committed user email.       | none                  |
