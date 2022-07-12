@@ -14,9 +14,3 @@ jobs:
         with:
           email: ${{ secrets.GIT_EMAIL }}
           username: smoothbear
-
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
