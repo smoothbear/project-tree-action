@@ -4,7 +4,13 @@
 **Options**
 | key      | description                       | default value         |
 |----------|-----------------------------------|-----------------------|
-| title    | text to be replaced.              | ### Project Structure
+| title    | text to be replaced.              |`### Project Structure`|
+| path     | file to be replaced text.         | README.md             |
+| message  | commit message when text updated. | update: project tree  |
+| email    | to be committed user email.       | none                  |
+| username | to be committed user name.        | none                  |
+
+
 **Example Workflow**
 ```.
 ├── LICENSE
