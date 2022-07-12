@@ -7,7 +7,7 @@ const baseDir = ".";
 const git = simpleGit(baseDir);
 
 export async function run() {
-    const regex = core.getInput("regex", { required: true });
+    const title = core.getInput("title", { required: true });
     const path = `${process.env.GITHUB_WORKSPACE ? process.env.GITHUB_WORKSPACE : "."}/${core.getInput("path", { required: true })}`;
     const message = core.getInput("message", { required: true });
     const email = core.getInput("email", { required: true });
@@ -33,8 +33,12 @@ export async function run() {
                 return;
             }
 
-            stdout = "```" + stdout + "```";
-            const replaced = contents.replace(RegExp(regex), stdout);
+            stdout = title + "\n" + "```" + stdout + "```";
+            const replacedRegex = "(\n```((.|\n)*)```)?"
+            const replaced = contents.replace(
+                RegExp(title + replacedRegex),
+                stdout
+            );
             core.info(`replaced content: ${replaced}`);
 
             fs.writeFile(path, replaced, "utf-8", err => {
