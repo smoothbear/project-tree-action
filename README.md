@@ -1,10 +1,11 @@
 # Project tree workflow
 
 ### How to use
-**Example Workflow**
+**Options**
 | key      | description                       | default value         |
 |----------|-----------------------------------|-----------------------|
 | title    | text to be replaced.              | ### Project Structure
+**Example Workflow**
 ```.
 ├── LICENSE
 ├── README.md
