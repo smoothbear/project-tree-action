@@ -15,7 +15,7 @@ export async function run() {
 
     core.info(path);
 
-    exec("tree -a", (error, stdout, stderr) => {
+    exec("tree -a", async (error, stdout, stderr) => {
         if (error) {
             core.error(`error: exec ${error.message}`);
             return;
@@ -43,11 +43,12 @@ export async function run() {
             });
         });
 
-        git.addConfig("user.email", email).addConfig("user.name", username);
+        await git.addConfig("user.email", email).addConfig("user.name", username);
 
-        git.add(path);
-        git.commit(message);
-        git.log().then(result => core.info(result.latest ? result.latest.message : ""));
+        await git.add(path);
+        await git.commit(message);
+        await git.push();
+        await git.log().then(result => core.info(result.latest ? result.latest.message : ""));
     });
 }
 

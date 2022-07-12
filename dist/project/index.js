@@ -7373,7 +7373,7 @@ function run() {
         const email = core.getInput("email", { required: true });
         const username = core.getInput("username", { required: true });
         core.info(path);
-        (0, child_process_1.exec)("tree -a", (error, stdout, stderr) => {
+        (0, child_process_1.exec)("tree -a", (error, stdout, stderr) => __awaiter(this, void 0, void 0, function* () {
             if (error) {
                 core.error(`error: exec ${error.message}`);
                 return;
@@ -7396,11 +7396,12 @@ function run() {
                     }
                 });
             });
-            git.addConfig("user.email", email).addConfig("user.name", username);
-            git.add(path);
-            git.commit(message);
-            git.log().then(result => core.info(result.latest ? result.latest.message : ""));
-        });
+            yield git.addConfig("user.email", email).addConfig("user.name", username);
+            yield git.add(path);
+            yield git.commit(message);
+            yield git.push();
+            yield git.log().then(result => core.info(result.latest ? result.latest.message : ""));
+        }));
     });
 }
 exports.run = run;
