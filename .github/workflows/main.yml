@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Insert Project Tree
-        uses: smoothbear/project-tree-action@842d33b3d8691f5a5eac73edd209349ff0871102
+        uses: smoothbear/project-tree-action@240703e15482eabb11fe8f74e23bfd023aad920e
         with:
           email: ${{ secrets.GIT_EMAIL }}
           username: smoothbear
