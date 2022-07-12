@@ -9,8 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Insert Project Tree
+      - name: Insert project tree
         uses: smoothbear/project-tree-action@240703e15482eabb11fe8f74e23bfd023aad920e
         with:
           email: ${{ secrets.GIT_EMAIL }}
           username: smoothbear
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}

@@ -47,7 +47,6 @@ export async function run() {
 
         git.add(path);
         git.commit(message);
-        git.push();
     });
 }
 
