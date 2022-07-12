@@ -15,7 +15,7 @@ export async function run() {
 
     core.info(path);
 
-    exec("tree -a", async (error, stdout, stderr) => {
+    exec("tree -I .git", async (error, stdout, stderr) => {
         if (error) {
             core.error(`error: exec ${error.message}`);
             return;
@@ -33,22 +33,29 @@ export async function run() {
                 return;
             }
 
+            stdout = "```" + stdout + "```";
             const replaced = contents.replace(RegExp(regex), stdout);
             core.info(`replaced content: ${replaced}`);
 
-            fs.writeFile(path, replaced, "utf-8", (err) => {
+            fs.writeFile(path, replaced, "utf-8", err => {
                 if (err != null) {
-                    core.error(`error: writefile ${err}`)
+                    core.error(`error: writefile ${err}`);
                 }
             });
         });
 
-        await git.addConfig("user.email", email).addConfig("user.name", username);
+        await git
+            .addConfig("user.email", email)
+            .addConfig("user.name", username);
 
         await git.add(path);
         await git.commit(message);
         await git.push();
-        await git.log().then(result => core.info(result.latest ? result.latest.message : ""));
+        await git
+            .log()
+            .then(result =>
+                core.info(result.latest ? result.latest.message : "")
+            );
     });
 }
 

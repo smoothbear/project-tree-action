@@ -7373,7 +7373,7 @@ function run() {
         const email = core.getInput("email", { required: true });
         const username = core.getInput("username", { required: true });
         core.info(path);
-        (0, child_process_1.exec)("tree -a", (error, stdout, stderr) => __awaiter(this, void 0, void 0, function* () {
+        (0, child_process_1.exec)("tree -I .git", (error, stdout, stderr) => __awaiter(this, void 0, void 0, function* () {
             if (error) {
                 core.error(`error: exec ${error.message}`);
                 return;
@@ -7388,19 +7388,24 @@ function run() {
                     core.error(`error: readfile ${err}`);
                     return;
                 }
+                stdout = "```" + stdout + "```";
                 const replaced = contents.replace(RegExp(regex), stdout);
                 core.info(`replaced content: ${replaced}`);
-                fs.writeFile(path, replaced, "utf-8", (err) => {
+                fs.writeFile(path, replaced, "utf-8", err => {
                     if (err != null) {
                         core.error(`error: writefile ${err}`);
                     }
                 });
             });
-            yield git.addConfig("user.email", email).addConfig("user.name", username);
+            yield git
+                .addConfig("user.email", email)
+                .addConfig("user.name", username);
             yield git.add(path);
             yield git.commit(message);
             yield git.push();
-            yield git.log().then(result => core.info(result.latest ? result.latest.message : ""));
+            yield git
+                .log()
+                .then(result => core.info(result.latest ? result.latest.message : ""));
         }));
     });
 }
