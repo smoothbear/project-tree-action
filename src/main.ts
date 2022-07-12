@@ -8,10 +8,12 @@ const git = simpleGit(baseDir);
 
 export async function run() {
     const regex = core.getInput("regex", { required: true });
-    const path = `${process.env.GITHUB_WORKSPACE}/${core.getInput("path", { required: true })}`;
+    const path = `${process.env.GITHUB_WORKSPACE ? process.env.GITHUB_WORKSPACE : "."}/${core.getInput("path", { required: true })}`;
     const message = core.getInput("message", { required: true });
     const email = core.getInput("email", { required: true });
     const username = core.getInput("username", { required: true });
+
+    core.info(path);
 
     exec("tree -a", (error, stdout, stderr) => {
         if (error) {
@@ -22,6 +24,8 @@ export async function run() {
             core.error(`stderr: stderr ${stderr}`);
             return;
         }
+
+        core.info(stdout);
 
         fs.readFile(path, "utf-8", (err, contents) => {
             if (err) {

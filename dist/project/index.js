@@ -7368,10 +7368,11 @@ const git = (0, simple_git_1.default)(baseDir);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         const regex = core.getInput("regex", { required: true });
-        const path = `${process.env.GITHUB_WORKSPACE}/${core.getInput("path", { required: true })}`;
+        const path = `${process.env.GITHUB_WORKSPACE ? process.env.GITHUB_WORKSPACE : "."}/${core.getInput("path", { required: true })}`;
         const message = core.getInput("message", { required: true });
         const email = core.getInput("email", { required: true });
         const username = core.getInput("username", { required: true });
+        core.info(path);
         (0, child_process_1.exec)("tree -a", (error, stdout, stderr) => {
             if (error) {
                 core.error(`error: exec ${error.message}`);
@@ -7381,6 +7382,7 @@ function run() {
                 core.error(`stderr: stderr ${stderr}`);
                 return;
             }
+            core.info(stdout);
             fs.readFile(path, "utf-8", (err, contents) => {
                 if (err) {
                     core.error(`error: readfile ${err}`);
