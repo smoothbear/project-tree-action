@@ -34,6 +34,7 @@ export async function run() {
             }
 
             const replaced = contents.replace(RegExp(regex), stdout);
+            core.info(`replaced content: ${replaced}`);
 
             fs.writeFile(path, replaced, "utf-8", (err) => {
                 if (err != null) {
