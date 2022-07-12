@@ -7399,6 +7399,7 @@ function run() {
             git.addConfig("user.email", email).addConfig("user.name", username);
             git.add(path);
             git.commit(message);
+            git.log().then(result => core.info(result.latest ? result.latest.message : ""));
         });
     });
 }

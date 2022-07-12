@@ -47,6 +47,7 @@ export async function run() {
 
         git.add(path);
         git.commit(message);
+        git.log().then(result => core.info(result.latest ? result.latest.message : ""));
     });
 }
 
