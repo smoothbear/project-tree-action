@@ -14,3 +14,4 @@ jobs:
         with:
           email: ${{ secrets.GIT_EMAIL }}
           username: smoothbear
+          token: ${{ secrets.GITHUB_TOKEN }}
