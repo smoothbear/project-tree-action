@@ -1,7 +1,7 @@
 # Project tree workflow
 
-### How to use
-**Options**
+## How to use
+### Options
 | Key      | Description                       | Default value         |
 |----------|-----------------------------------|-----------------------|
 | title    | text to be replaced.              | Default Title         |
@@ -12,7 +12,7 @@
 | token    | repository token or user token.   | none                  |
 
 
-**Example Workflow**
+### Example Workflow
 ```yml
 name: Update to README
 
