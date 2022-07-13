@@ -1,4 +1,6 @@
 # Project tree workflow
+## Introduction
+Project tree workflow is automatically changes the project directory structure in your README.md or any text file.
 
 ## How to use
 ### Options
