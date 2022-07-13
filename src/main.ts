@@ -1,5 +1,6 @@
 import * as core from "@actions/core";
 import * as fs from "fs";
+import * as github from "@actions/github";
 import { exec } from "child_process";
 import simpleGit from "simple-git";
 
@@ -12,6 +13,11 @@ export async function run() {
     const message = core.getInput("message", { required: true });
     const email = core.getInput("email", { required: true });
     const username = core.getInput("username", { required: true });
+    const token = core.getInput("token", { required: true });
+    const repo = github.context.repo;
+    const repoUrl = `github.com/${repo.owner}/${repo.repo}`;
+
+    const remote = `https://${username}:${token}@${repoUrl}`;
 
     core.info(path);
 
@@ -54,7 +60,7 @@ export async function run() {
 
         await git.add(path);
         await git.commit(message);
-        await git.push();
+        await git.push(remote);
     });
 }
 

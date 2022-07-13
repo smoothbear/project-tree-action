@@ -20,6 +20,9 @@ inputs:
     username:
       description: 'to be committed user name.'
       required: true
+    token:
+      description: 'repository token or user token.'
+      required: true
 runs:
     using: 'node16'
     main: 'dist/project/index.js'
