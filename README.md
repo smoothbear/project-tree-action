@@ -9,6 +9,7 @@
 | message  | commit message when text updated. | update: project tree  |
 | email    | to be committed user email.       | none                  |
 | username | to be committed user name.        | none                  |
+| token    | repository token or user token.   | none                  |
 
 
 **Example Workflow**
@@ -29,6 +30,7 @@ jobs:
         with:
           email: to be committed email
           username: to be committed username
+          token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ### Project Structure
