@@ -24,14 +24,14 @@ inputs:
       description: 'repository token or user token.'
       required: true
     branches:
-      description: 'create branch for update.'
+      description: 'created branch's name for update.'
       required: false
     target-branches:
       description: 'pr to target branches.'
       required: true
       default: 'main'
     pr:
-      description: 'create pull request when updated.'
+      description: 'create pull request when branch is updated.'
       required: true
       default: false
     pr-title:

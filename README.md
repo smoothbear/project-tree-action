@@ -4,14 +4,18 @@ Project tree workflow is automatically changes the project directory structure i
 
 ## How to use
 ### Options
-| Key      | Description                       | Default value         |
-|----------|-----------------------------------|-----------------------|
-| title    | text to be replaced.              | Default Title         |
-| path     | file to be replaced text.         | README.md             |
-| message  | commit message when text updated. | update: project tree  |
-| email    | to be committed user email.       | none                  |
-| username | to be committed user name.        | none                  |
-| token    | repository token or user token.   | none                  |
+| Key             | Description                                 | Default value              |
+|-----------------|---------------------------------------------|----------------------------|
+| title           | text to be replaced.                        | ### Project Structure      |
+| path            | file to be replaced text.                   | README.md                  |
+| message         | commit message when text updated.           | update: project tree       |
+| email           | to be committed user email.                 | none                       |
+| username        | to be committed user name.                  | none                       |
+| token           | repository token or user token.             | none                       |
+| branches        | created branch's name for update.           |                            |
+| target-branches | pr to target branches.                      | main                       |
+| pr              | create pull request when branch is updated. |                            |
+| pr-title        | pull request title                          | update: project structure. |
 
 
 ### Example Workflow
