@@ -65,6 +65,7 @@ export async function run() {
 
         if (branches) {
             await git.checkout(["-b", branches]);
+            await git.add(path);
             await git.commit(message);
             await git.push(remote);
 

@@ -14227,6 +14227,7 @@ function run() {
                 .addConfig("push.default", "current");
             if (branches) {
                 yield git.checkout(["-b", branches]);
+                yield git.add(path);
                 yield git.commit(message);
                 yield git.push(remote);
                 const repoInfo = { owner: repo.owner, repo: repo.repo };
