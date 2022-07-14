@@ -24,7 +24,7 @@ inputs:
       description: 'repository token or user token.'
       required: true
     branches:
-      description: 'created branch's name for update.'
+      description: 'created branchs name for update.'
       required: false
     target-branches:
       description: 'pr to target branches.'
@@ -37,7 +37,7 @@ inputs:
     pr-title:
       description: 'pull request title.'
       required: true
-      default: "update: project structure."
+      default: 'update: project structure.'
 runs:
     using: 'node16'
     main: 'dist/project/index.js'
