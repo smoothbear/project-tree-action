@@ -91,7 +91,7 @@ export async function run() {
                     ...repoInfo,
                     ...{
                         title: prTitle,
-                        head: `${remote}:${branches}`,
+                        head: `${username}:${branches}`,
                         base: targetBranches
                     }
                 });
