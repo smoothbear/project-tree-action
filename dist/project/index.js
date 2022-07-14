@@ -14227,7 +14227,6 @@ function run() {
                 .addConfig("push.default", "current");
             if (branches) {
                 yield git.checkout(["-b", branches]);
-                yield git.pull(remote, branches);
                 yield git.add(path);
                 const result = yield git.commit(message);
                 yield git.push(remote);
@@ -14245,7 +14244,7 @@ function run() {
                     }
                     client.rest.pulls.create(Object.assign(Object.assign({}, repoInfo), {
                         title: prTitle,
-                        head: `${username}:${branches}`,
+                        head: `${remote}:${branches}`,
                         base: targetBranches
                     }));
                 }

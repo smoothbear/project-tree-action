@@ -6,7 +6,7 @@ Project tree workflow is automatically changes the project directory structure i
 ### Options
 | Key             | Description                                 | Default value              |
 |-----------------|---------------------------------------------|----------------------------|
-| title           | text to be replaced.                        | Project Structure          |
+| title           | text to be replaced.                        |                            |
 | path            | file to be replaced text.                   | README.md                  |
 | message         | commit message when text updated.           | update: project tree       |
 | email           | to be committed user email.                 | none                       |
