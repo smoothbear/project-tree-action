@@ -14229,7 +14229,7 @@ function run() {
                 yield git.checkout(["-b", branches]);
                 yield git.add(path);
                 const result = yield git.commit(message);
-                yield git.push(remote);
+                yield git.push(["-f", remote]);
                 const repoInfo = { owner: repo.owner, repo: repo.repo };
                 if (pr && result.summary.changes > 0) {
                     const client = github.getOctokit(token);

@@ -67,7 +67,7 @@ export async function run() {
             await git.checkout(["-b", branches]);
             await git.add(path);
             const result = await git.commit(message);
-            await git.push(remote);
+            await git.push(["-f", remote]);
 
             const repoInfo = { owner: repo.owner, repo: repo.repo };
 
