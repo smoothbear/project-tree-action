@@ -60,12 +60,13 @@ export async function run() {
 
         await git
             .addConfig("user.email", email)
-            .addConfig("user.name", username);
+            .addConfig("user.name", username)
+            .addConfig("push.default", "current");
 
         if (branches) {
             await git.checkout(["-b", branches]);
             await git.commit(message);
-            await git.push(["--set-upstream", remote, branches]);
+            await git.push(remote, branches);
 
             const repoInfo = { owner: repo.owner, repo: repo.repo }
 

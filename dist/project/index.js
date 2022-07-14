@@ -14223,11 +14223,12 @@ function run() {
             });
             yield git
                 .addConfig("user.email", email)
-                .addConfig("user.name", username);
+                .addConfig("user.name", username)
+                .addConfig("push.default", "current");
             if (branches) {
                 yield git.checkout(["-b", branches]);
                 yield git.commit(message);
-                yield git.push(["--set-upstream", remote, branches]);
+                yield git.push(remote, branches);
                 const repoInfo = { owner: repo.owner, repo: repo.repo };
                 if (pr) {
                     const client = github.getOctokit(token);
