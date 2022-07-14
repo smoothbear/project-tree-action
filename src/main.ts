@@ -65,7 +65,7 @@ export async function run() {
         if (branches) {
             await git.checkout(["-b", branches]);
             await git.commit(message);
-            await git.push(["--set-upstream", remote]);
+            await git.push(["--set-upstream", remote, branches]);
 
             const repoInfo = { owner: repo.owner, repo: repo.repo }
 

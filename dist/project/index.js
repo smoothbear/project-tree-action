@@ -14227,7 +14227,7 @@ function run() {
             if (branches) {
                 yield git.checkout(["-b", branches]);
                 yield git.commit(message);
-                yield git.push(["--set-upstream", remote]);
+                yield git.push(["--set-upstream", remote, branches]);
                 const repoInfo = { owner: repo.owner, repo: repo.repo };
                 if (pr) {
                     const client = github.getOctokit(token);
