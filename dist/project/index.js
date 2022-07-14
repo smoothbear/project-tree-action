@@ -14188,6 +14188,10 @@ function run() {
         const email = core.getInput("email", { required: true });
         const username = core.getInput("username", { required: true });
         const token = core.getInput("token", { required: true });
+        const branches = core.getInput("branches", { required: false });
+        const targetBranches = core.getInput("target-branches", { required: true });
+        const pr = core.getInput("pr", { required: true });
+        const prTitle = core.getInput("pr-title", { required: true });
         const repo = github.context.repo;
         const repoUrl = `github.com/${repo.owner}/${repo.repo}`;
         const remote = `https://${username}:${token}@${repoUrl}`;
@@ -14220,6 +14224,26 @@ function run() {
             yield git
                 .addConfig("user.email", email)
                 .addConfig("user.name", username);
+            if (branches) {
+                yield git.checkout(["-b", branches]);
+                yield git.commit(message);
+                yield git.push(["--set-upstream", remote]);
+                const repoInfo = { owner: repo.owner, repo: repo.repo };
+                if (pr) {
+                    const client = github.getOctokit(token);
+                    const prList = yield client.rest.pulls.list(Object.assign(Object.assign({}, repoInfo), { state: "open" }));
+                    let isAlreadyOpened = false;
+                    prList.data.map(data => {
+                        if (data.title == prTitle)
+                            isAlreadyOpened = true;
+                    });
+                    if (isAlreadyOpened) {
+                        return;
+                    }
+                    client.rest.pulls.create(Object.assign(Object.assign({}, repoInfo), { title: prTitle, head: `${username}:${branches}`, base: targetBranches }));
+                }
+                return;
+            }
             yield git.add(path);
             yield git.commit(message);
             yield git.push(remote);

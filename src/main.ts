@@ -14,6 +14,10 @@ export async function run() {
     const email = core.getInput("email", { required: true });
     const username = core.getInput("username", { required: true });
     const token = core.getInput("token", { required: true });
+    const branches = core.getInput("branches", { required: false });
+    const targetBranches = core.getInput("target-branches", { required: true })
+    const pr = core.getInput("pr", { required: true });
+    const prTitle = core.getInput("pr-title", { required: true });
     const repo = github.context.repo;
     const repoUrl = `github.com/${repo.owner}/${repo.repo}`;
 
@@ -58,6 +62,39 @@ export async function run() {
             .addConfig("user.email", email)
             .addConfig("user.name", username);
 
+        if (branches) {
+            await git.checkout(["-b", branches]);
+            await git.commit(message);
+            await git.push(["--set-upstream", remote]);
+
+            const repoInfo = { owner: repo.owner, repo: repo.repo }
+
+            if (pr) {
+                const client = github.getOctokit(token);
+                const prList = await client.rest.pulls.list({
+                    ...repoInfo,
+                    ...{ state: "open" }
+                });
+                
+                let isAlreadyOpened = false
+                prList.data.map(data => {
+                    if (data.title == prTitle)
+                        isAlreadyOpened = true
+                })
+
+                if (isAlreadyOpened) {
+                    return;
+                }
+
+                client.rest.pulls.create({
+                    ...repoInfo,
+                    ...{ title: prTitle, head: `${username}:${branches}`, base: targetBranches},
+                })
+            }
+
+            return;
+        }
+        
         await git.add(path);
         await git.commit(message);
         await git.push(remote);
