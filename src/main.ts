@@ -65,24 +65,24 @@ export async function run() {
 
         if (branches) {
             await git.checkout(["-b", branches]);
+            await git.pull();
             await git.add(path);
-            await git.commit(message);
+            const result = await git.commit(message);
             await git.push(remote);
 
-            const repoInfo = { owner: repo.owner, repo: repo.repo }
+            const repoInfo = { owner: repo.owner, repo: repo.repo };
 
-            if (pr) {
+            if (pr && result.summary.changes > 0) {
                 const client = github.getOctokit(token);
                 const prList = await client.rest.pulls.list({
                     ...repoInfo,
                     ...{ state: "open" }
                 });
-                
-                let isAlreadyOpened = false
+
+                let isAlreadyOpened = false;
                 prList.data.map(data => {
-                    if (data.title == prTitle)
-                        isAlreadyOpened = true
-                })
+                    if (data.title == prTitle) isAlreadyOpened = true;
+                });
 
                 if (isAlreadyOpened) {
                     return;
@@ -90,8 +90,12 @@ export async function run() {
 
                 client.rest.pulls.create({
                     ...repoInfo,
-                    ...{ title: prTitle, head: `${username}:${branches}`, base: targetBranches},
-                })
+                    ...{
+                        title: prTitle,
+                        head: `${username}:${branches}`,
+                        base: targetBranches
+                    }
+                });
             }
 
             return;

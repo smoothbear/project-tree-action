@@ -14227,11 +14227,12 @@ function run() {
                 .addConfig("push.default", "current");
             if (branches) {
                 yield git.checkout(["-b", branches]);
+                yield git.pull();
                 yield git.add(path);
-                yield git.commit(message);
+                const result = yield git.commit(message);
                 yield git.push(remote);
                 const repoInfo = { owner: repo.owner, repo: repo.repo };
-                if (pr) {
+                if (pr && result.summary.changes > 0) {
                     const client = github.getOctokit(token);
                     const prList = yield client.rest.pulls.list(Object.assign(Object.assign({}, repoInfo), { state: "open" }));
                     let isAlreadyOpened = false;
@@ -14242,7 +14243,11 @@ function run() {
                     if (isAlreadyOpened) {
                         return;
                     }
-                    client.rest.pulls.create(Object.assign(Object.assign({}, repoInfo), { title: prTitle, head: `${username}:${branches}`, base: targetBranches }));
+                    client.rest.pulls.create(Object.assign(Object.assign({}, repoInfo), {
+                        title: prTitle,
+                        head: `${username}:${branches}`,
+                        base: targetBranches
+                    }));
                 }
                 return;
             }
