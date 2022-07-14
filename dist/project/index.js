@@ -14244,7 +14244,7 @@ function run() {
                     }
                     client.rest.pulls.create(Object.assign(Object.assign({}, repoInfo), {
                         title: prTitle,
-                        head: `${remote}:${branches}`,
+                        head: `${username}:${branches}`,
                         base: targetBranches
                     }));
                 }
