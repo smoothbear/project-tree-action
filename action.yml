@@ -1,43 +1,17 @@
-name: 'Insert Project Tree'
-description: 'Automatically setting up project tree text to README.md'
-author: 'smoothbear'
-inputs:
-    title:
-      description: 'text to be replaced.'
-      default: '### Project Structure'
-      required: true
-    path:
-      description: 'file to be replaced text.'
-      default: 'README.md'
-      required: true
-    message:
-      description: 'commit message when text updated.'
-      default: 'update: project tree'
-      required: true
-    email:
-      description: 'to be committed user email.'
-      required: true
-    username:
-      description: 'to be committed user name.'
-      required: true
-    token:
-      description: 'repository token or user token.'
-      required: true
-    branches:
-      description: 'created branchs name for update.'
-      required: false
-    target-branches:
-      description: 'pr to target branches.'
-      required: true
-      default: 'main'
-    pr:
-      description: 'create pull request when branch is updated.'
-      required: true
-      default: false
-    pr-title:
-      description: 'pull request title.'
-      required: true
-      default: 'update: project structure.'
-runs:
-    using: 'node16'
-    main: 'dist/project/index.js'
+name: Update to README
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  change-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Insert project tree
+        uses: smoothbear/project-tree-action@main
+        with:
+          email: to be committed email
+          username: to be committed username
+          token: ${{ secrets.GITHUB_TOKEN }}
